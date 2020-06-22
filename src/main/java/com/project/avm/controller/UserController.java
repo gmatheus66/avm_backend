@@ -20,9 +20,9 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public List<File> show(@PathVariable String id){
+    public User show(@PathVariable String id){
         int userid = Integer.parseInt(id);
-        return userRepository.findById(userid).get().getFile();
+        return userRepository.findById(userid).get();
     }
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public List<User> showUsers(){
