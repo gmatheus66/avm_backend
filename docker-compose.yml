@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+  spring-app:
+    build:
+      context: .
+      dockerfile: spring.dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - app_network
+    depends_on:
+      - mysql-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-app:3306/avm?createDatabaseIfNotExist=true&autoReconnect=true&useSSL=false
+
+  mysql-app:
+    build:
+      context: .
+      dockerfile: mysql.dockerfile
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=avmroot
+      - MYSQL_DATABASE=avm
+    networks:
+      - app_network
+    volumes:
+      - my-datavolume:/var/lib/mysql
+
+volumes:
+  my-datavolume:
+
+networks:
+  app_network:
+    driver: bridge
