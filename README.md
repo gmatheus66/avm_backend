@@ -54,3 +54,6 @@ $ docker-compose up spring-app
 | localhost:8080/file/delete   | POST    | Content-Type application/json   |Raw `{"user_id": "1","file_id": "2"}`|Deletar um arquivo|
 | localhost:8080/file    | POST      |       |Form-data `file=@/home/teste.img user_id=1`|Upload de um arquivo|
 | localhost:8080/users   | GET     |       | |Pegar todos os usuarios||
+
+
+[Postman para teste da API](https://www.postman.com/downloads/)
